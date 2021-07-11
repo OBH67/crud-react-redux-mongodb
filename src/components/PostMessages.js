@@ -27,6 +27,7 @@ const PostMessages = ({ classes, ...props }) => {
         props.fetchAllPostMessages()
     }, [])//DidMount
 
+    // This function execute the delete action
     const onDelete = id => {
         const onSuccess = () => {
             ButterToast.raise({
@@ -90,10 +91,12 @@ const PostMessages = ({ classes, ...props }) => {
     );
 }
 
+// It receives the entire store state, and should return an object of data this component needs.
 const mapStateToProps = state => ({
     postMessageList: state.postMessage.list
 })
 
+// We can dispatch actions 
 const mapActionToProps = {
     fetchAllPostMessages: actions.fetchAll,
     deletePostMessage: actions.Delete

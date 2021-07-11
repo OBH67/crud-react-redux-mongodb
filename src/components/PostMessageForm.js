@@ -6,6 +6,7 @@ import * as actions from "../actions/postMessage";
 import ButterToast, { Cinnamon } from "butter-toast";
 import { AssignmentTurnedIn } from "@material-ui/icons";
 
+// Initial data for the inputs
 const initialFieldValues = {
     title: '',
     message: ''
@@ -29,15 +30,17 @@ const styles = theme => ({
 
 const PostMessageForm = ({ classes, ...props }) => {
 
+    // Inside of this useEffect we can get the data from the record to pass it to the inputs and update this data
     useEffect(() => {
         if (props.currentId !== 0){
             setValues({
-                ...props.postMessageList.find(x => x._id === props.currentId)
+                ...props.postMessageList.find(x => x._id === props.currentId) // This will save on the values the data of the record we selected
             })
             setErrors({})
         }
     }, [props.currentId])
 
+    // This function permit to show a message to the user when the inputs are empty and he try to submit data
     const validate = () => {
         let temp = { ...errors }
         temp.title = values.title ? "" : "This field is required."
@@ -45,7 +48,7 @@ const PostMessageForm = ({ classes, ...props }) => {
         setErrors({
             ...temp
         })
-        return Object.values(temp).every(x => x === "")
+        return Object.values(temp).every(x => x === "") // This return a message if the inputs are empty
     }
 
     var {
@@ -57,6 +60,7 @@ const PostMessageForm = ({ classes, ...props }) => {
         resetForm
     } = useForm(initialFieldValues,props.setCurrentId)
 
+    // This function will execute the action to create a new record on the database
     const handleSubmit = e => {
         e.preventDefault()
         const onSuccess = () => {

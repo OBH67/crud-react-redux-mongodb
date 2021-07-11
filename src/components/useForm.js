@@ -2,9 +2,11 @@ import {useState } from "react";
 
 const useForm = (initialFieldValues,setCurrentId) => {
 
+    // here we store the data from the inputs
     const [values, setValues] = useState(initialFieldValues)
     const [errors, setErrors] = useState({})
 
+    // This function permit to get the changes on the inputs
     const handleInputChange = e => {
         const { name, value } = e.target
         setValues({
